@@ -111,5 +111,11 @@ namespace PlayWrightAutomation.PageObject
             await this.goToBookStore.ClickAsync();
             await page.WaitForTimeoutAsync(2000);
         }
+
+        internal async Task ClickLogoutButtonAsync()
+        {
+            await this.page.ClickAsync("button#submit");
+            await this.page.WaitForTimeoutAsync(2000);
+        }
     }
 }

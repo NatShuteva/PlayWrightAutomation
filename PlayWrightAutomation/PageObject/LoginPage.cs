@@ -59,5 +59,18 @@ namespace PlayWrightAutomation.PageObject
             return (await invalidLoginMessage.InnerTextAsync()).Trim();
         }
 
+        public async Task WaitForLoginPageAsync()
+        {
+            await this.page.WaitForSelectorAsync("#login", new PageWaitForSelectorOptions
+            {
+                State = WaitForSelectorState.Visible,
+                Timeout = 10000
+            });
+        }
+
+        public string GetCurrentUrl()
+        {
+            return this.page.Url;
+        }
     }
 }

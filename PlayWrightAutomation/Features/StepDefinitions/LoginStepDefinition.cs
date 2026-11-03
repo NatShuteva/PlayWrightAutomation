@@ -47,5 +47,18 @@ namespace PlayWrightAutomation.Features.StepDefinitions
             Assert.That(message, Is.EqualTo("Invalid username or password!"));
         }
 
-    }
+        [When("click on the Logout button")]
+        public async Task WhenClickOnTheLogoutButton()
+        {
+            await profilePage.ClickLogoutButtonAsync();
+        }
+
+        [Then("the login page is displayed")]
+        public async Task ThenTheLoginPageIsDisplayed()
+        {
+            await loginPage.WaitForLoginPageAsync();
+            Assert.That(loginPage.GetCurrentUrl(), Does.Contain("/login"));
+        }
+
+}
 }
