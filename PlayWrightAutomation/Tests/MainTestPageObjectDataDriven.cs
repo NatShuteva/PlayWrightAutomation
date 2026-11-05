@@ -15,8 +15,8 @@ namespace PlayWrightAutomation.Tests
     {
         public class LoginTestData
         {
-            public string? Username { get; set; }
-            public string? Password { get; set; }
+            public string? Username { get; set; }   //get read the value from the json file
+            public string? Password { get; set; }   //set assigan a value to the property
         }
 
         //this code read the data drom the LoginTestData.json file and return the data in a dictionary with the username as the key and the LoginTestData object as the value

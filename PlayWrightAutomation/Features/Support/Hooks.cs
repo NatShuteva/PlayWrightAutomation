@@ -25,18 +25,22 @@ namespace PlayWrightAutomation.Features.Support
         [BeforeScenario]  //runs before every test scenario
         public async Task Setup()
         {
+            //initializes Playwright and opens a new Chromium browser page
             driver.Playwright = await Microsoft.Playwright.Playwright.CreateAsync();
             driver.Browser = await driver.Playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
-                Headless = false
+                Headless = false  //Headless = false means the browser window is visible on the screen.
             });
+            //A Browser Context is an isolated browser session (cookes, local storage, secion storage, etc.) that can be used to create multiple independent pages within the same browser instance.
             driver.Context = await driver.Browser.NewContextAsync();
+            //Creates a new browser tab inside the context.
             driver.Page = await driver.Context.NewPageAsync();
         }
 
         [AfterScenario]   //runs after every test scenario
         public async Task Cleanup()
         {
+            //clean up and close everything that Playwright opened after your test finishes.
             if (driver.Context != null)
                 await driver.Context.CloseAsync();
             if (driver.Browser != null)
