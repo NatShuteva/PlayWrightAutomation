@@ -55,7 +55,6 @@ namespace PlayWrightAutomation.Tests
             foreach (var title in allProductCardTitles)
             {
                 Console.WriteLine("Product card title: " + title);
-                break;
             }
         }
 

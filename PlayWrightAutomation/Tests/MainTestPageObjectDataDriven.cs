@@ -15,11 +15,12 @@ namespace PlayWrightAutomation.Tests
     {
         public class LoginTestData
         {
-            public string? Username { get; set; }   //get read the value from the json file
-            public string? Password { get; set; }   //set assigan a value to the property
+            //property is a member of a class that stores data and allows you to read (get) or change (set) that data.
+            public string? Username { get; set; }   //get read the value from the json file, set assigan a value to the property
+            public string? Password { get; set; }   
         }
 
-        //this code read the data drom the LoginTestData.json file and return the data in a dictionary with the username as the key and the LoginTestData object as the value
+        //this code read the data from the LoginTestData.json file and return the data in a dictionary with the username as the key and the LoginTestData object as the value
         private static Dictionary<string, LoginTestData> GetLoginDatasetsByUser()
         {
             var jsonPath = Path.Combine(AppContext.BaseDirectory, "Data", "LoginTestData.json");
@@ -87,6 +88,7 @@ namespace PlayWrightAutomation.Tests
             try
             {
                 // Create object instance
+                //calls the constructor of the class and creates an instance of that class (the instance (object) is what allows you to use the methods and data defined in the class)
                 var loginPage = new LoginPage(page);
                 await loginPage.GoToAction();
                 await loginPage.validLogin(username, password);
