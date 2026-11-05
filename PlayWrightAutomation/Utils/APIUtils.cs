@@ -10,47 +10,23 @@ namespace PlayWrightAutomation.Utils
     {
         private readonly IAPIRequestContext apiContext;
 
+        //constructor 
         public APIUtils(IAPIRequestContext apiContext)
         {
             this.apiContext = apiContext;
         }
 
-        public async Task<string> GetToken()
-        {
-            var loginPayload = new
-            {
-                userName = "NatashaQA",
-                password = "Tester1234$"
-            };
-
-            var loginResponse = await this.apiContext.PostAsync(
-                "https://demoqa.com/Account/v1/GenerateToken", new APIRequestContextOptions
-                {
-                    DataObject = loginPayload
-                });
-
-            if (!loginResponse.Ok)
-                throw new Exception($"GenerateToken failed. Status: {loginResponse.Status}");
-
-            var json = await loginResponse.JsonAsync();
-            if (!json.HasValue)
-                throw new Exception("GenerateToken response body is empty.");
-
-            var token = json.Value.GetProperty("token").GetString();
-            if (string.IsNullOrWhiteSpace(token))
-                throw new Exception("Token is null or empty.");
-
-            return token;
-        }
-
+        //this method performs the API request and returns the response
         public async Task<(string Token, string UserId)> GetLoginAuthData()
         {
+            //payload is the data sent in an API request
             var loginPayload = new
             {
                 userName = "NatashaQA",
                 password = "Tester1234$"
             };
 
+            //sends a login request to the API
             var loginResponse = await this.apiContext.PostAsync(
                 "https://demoqa.com/Account/v1/Login",
                 new APIRequestContextOptions
@@ -74,6 +50,7 @@ namespace PlayWrightAutomation.Utils
             return (token, userId);
         }
 
+        //// Adds books directly through the Book Store API without using the UI
         public async Task<IAPIResponse> AddBooks(string userId, IEnumerable<string> isbns, string token)
         {
             var addBookPayload = new
