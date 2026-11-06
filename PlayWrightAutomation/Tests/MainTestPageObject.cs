@@ -39,6 +39,10 @@ namespace PlayWrightAutomation.Tests
             await page.WaitForURLAsync("**/profile", new PageWaitForURLOptions { Timeout = 30000 });
             Assert.That(page.Url, Does.Contain("/profile"));
 
+            //Create a new object of the ProfilePage class.
+            //page is an argument that is being passed to the constructor of the ProfilePage class.
+            //page is an object of type IPage
+            //IPage object represents a browser tab or webpage.
             var profilePage = new ProfilePage(page);
             var firstBookTitle = await profilePage.GetBookTitleAsync();
             await profilePage.GetAllBookTitlesAsync();

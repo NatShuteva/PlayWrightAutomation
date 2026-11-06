@@ -36,6 +36,7 @@ namespace PlayWrightAutomation.Tests
                 });
             Assert.That(deleteResponse.Status, Is.EqualTo(204).Or.EqualTo(200));
 
+            //add books using the AddBooks method
             var response = await apiUtils.AddBooks(authData.UserId, isbns, authData.Token);
             Assert.That(response.Status, Is.EqualTo(201));
         }
